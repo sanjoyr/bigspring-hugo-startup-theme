@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>{{.Title | default site.Title}}</title>
+<title>{{ if not .IsHome}}{{.Title}} | {{end}} {{site.Title}}</title>
 
 <!-- base url -->
 {{ if or (eq site.BaseURL "/") (eq site.BaseURL "http://localhost:1313/") (eq site.BaseURL "http://examplesite.org/") (eq site.BaseURL "https://examplesite.org/") (eq site.BaseURL "http://examplesite.com/") (eq site.BaseURL "https://examplesite.com/")}}{{else}}
@@ -18,8 +18,22 @@
 {{ hugo.Generator }}
 
 <!--Favicon-->
-<link rel="shortcut icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
-<link rel="icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
+<!-- <link rel="shortcut icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
+<link rel="icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon"> -->
+
+{{ "<!--Favicon-->" | safeHTML }}
+<meta name="Access-Control-Allow-Origin" content="{{ site.Params.shared_cdn  | absURL }}">
+
+<link rel="apple-touch-icon" sizes="180x180" href="{{ site.Params.shared_cdn }}favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ site.Params.shared_cdn }}favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ site.Params.shared_cdn }}favicons/favicon-16x16.png">
+<link rel="mask-icon" href="{{ site.Params.shared_cdn }}favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="{{ site.Params.shared_cdn }}favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="{{ site.Params.shared_cdn }}favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="manifest" href="{{ `site.webmanifest` | absURL}}">
 
 <!-- mobile responsive meta -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
