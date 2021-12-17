@@ -1,24 +1,51 @@
 {{ define "main" }}
 
 {{ partial "page-header.html" . }}
+
+<!-- contact -->
 <section class="section bg-white">
   <div class="container">
     <div class="row">
       <div class="col-lg-7 mb-4 mb-lg-0">
-        <form action="{{ site.Params.contact_form_action | safeURL }}" method="POST">
-          <input type="text" class="form-control mb-3" id="name" name="name" placeholder="{{ i18n `yourname` }}">
-          <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="{{ i18n `youremail` }}">
-          <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="{{ i18n `subject` }}">
-          <textarea name="message" id="message" class="form-control mb-3" placeholder="{{ i18n `yourmessage` }}"></textarea>
-          <button type="submit" value="send" class="btn btn-primary">{{ i18n `sendnow` }}</button>
+        <form action="" role="form" method="POST" class="contactForm">
+          {{ with site.Params.subjectcode }}
+          <input type="hidden" name="subject" id="subject" value="{{ . }}"/>
+          {{ else }}
+          <input type="hidden" name="subject" id="subject" value="WaraKarmaYoga"/>
+          {{ end }}
+          <div class="form-group">
+            <input type="text" name="namef" class="form-control" id="namef" placeholder="{{ i18n `your_name` }}" data-rule="minlen:4" data-msg="{{ i18n `name_validation_msg` }}" />
+            <div class="validation"></div>
+          </div>
+
+          <div class="form-group">
+            <input type="email" class="form-control" name="emails" id="emails" placeholder="{{ i18n `your_email_address` }}" data-rule="email" data-msg="{{ i18n `email_validation_msg` }}" />
+            <div class="validation"></div>
+          </div>
+
+          <div class="form-group">
+            <textarea class="form-control" name="message" rows="5" data-rule="required" placeholder="{{ i18n `write_your_message` }}" data-msg="{{ i18n `message_validation_msg` }}"></textarea>
+            <div class="validation"></div>
+          </div>
+          
+          <input type="text" id="name" name="name" class="extfields" autocomplete="off" placeholder="{{ i18n `your_name` }}">
+          <input type="email" id="email" name="email" class="extfields" autocomplete="off" placeholder="{{ i18n `your_email_address` }}">
+
+          <button type="submit" value="send" class="btn btn-primary">{{ i18n "send" }}</button>
         </form>
+        <div id="sendmessage">{{ i18n "send_success_msg" }}</div>
+        <div id="errormessage"></div>
       </div>
-      
       <div class="col-lg-5 content">
         {{ .Content }}
       </div>
     </div>
   </div>
 </section>
+<!-- /contact -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{ "<!-- Contact Form JS -->" | safeHTML }}
+<script src="{{ print site.Params.shared_cdn `js/contactformv2.js` | absURL }}"></script>
 
 {{ end }}
