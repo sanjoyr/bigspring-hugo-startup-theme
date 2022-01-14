@@ -1,0 +1,28 @@
+{{ $data := index site.Data site.Language.Lang }}
+
+<!-- team -->
+<section class="section">
+  <div class="container">
+    <h1>{{ $data.team.title }}</h1>
+    <p>{{ $data.team.intro }}</p>
+    <!-- team list -->
+    <div class="row">
+      <!-- team -->
+      {{ range $data.team.members }}
+      <div class="col-6">
+        <div class="card border-0 rounded-0 hover-shadow mb-5">
+            <img class="card-img-top rounded-0" src="{{ .image | relURL }}" alt="{{ .name }}">
+            <div class="card-body">
+              <h4 class="card-title">{{ .name }}</h4>
+              <p class="card-text">{{ .designation }}</p>
+              {{with .url }}
+              <a href="{{ . }}" class="btn">{{ $data.team.urlmsg }}</a>
+              {{ end }}
+            </div>
+          </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /team -->
