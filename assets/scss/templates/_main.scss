@@ -353,3 +353,22 @@ a.post-title {
   font-size: 50px;
   color: $text-color-dark;
 }
+
+.required {
+  color: red;
+}
+.hidden {
+  display: none;
+}
+.error {
+  color: red;
+}
+.success {
+  color: green;
+}
+.form-container {
+  padding: 20px;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
